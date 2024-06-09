@@ -1,0 +1,34 @@
+/* register.component.scss */
+
+// Bu dosyada, kayıt formu bileşenine özgü stilleri tanımlayabilirsiniz.
+
+// Örneğin, formun genel stilleri:
+form {
+    margin-top: 20px; /* Formun sayfanın üstünden 50 piksel aşağıda olmasını sağlar */
+  }
+  
+  // Alanlar arası boşluklar için:
+  .field {
+    margin-bottom: 20px; /* Her bir alanın altında 20 piksellik bir boşluk bırakır */
+  }
+  
+  // Input kutularının stilleri:
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 100%; /* Genişlik %100 */
+    padding: 10px; /* İç boşluk 10 piksel */
+    margin-bottom: 10px; /* Alanlar arası boşluk */
+  }
+  
+  // Hata mesajlarının stilleri:
+  .p-error {
+    color: red; /* Kırmızı renkte */
+    font-size: 14px; /* Yazı boyutu 14 piksel */
+  }
+  
+  // Kayıt ol butonunun stilleri:
+  .w-full {
+    width: 100%; /* Genişlik %100 */
+  }
+  

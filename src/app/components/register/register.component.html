@@ -1,0 +1,88 @@
+<head>
+    <!-- Diğer meta etiketleri buraya gelebilir -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<form [formGroup]="registerForm" (ngSubmit)="submitDetails()" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Bireysel Kayıt</h2>
+            <p class="mb-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="form-row mb-3">
+                <div class="col">
+                    <label for="name">İsim</label>
+                    <input type="text" formControlName="name" class="form-control" name="name" placeholder="İsim">
+                    <small *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('name')?.errors?.['required']">İsim gereklidir</div>
+                        <div *ngIf="registerForm.get('name')?.errors?.['pattern']">Geçerli bir isim giriniz</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <label for="surname">Soy İsim</label>
+                    <input type="text" formControlName="surname" class="form-control" name="surname" placeholder="Soy İsim">
+                    <small *ngIf="registerForm.get('surname')?.invalid && (registerForm.get('surname')?.dirty || registerForm.get('surname')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('surname')?.errors?.['required']">Soy isim gereklidir</div>
+                        <div *ngIf="registerForm.get('surname')?.errors?.['pattern']">Geçerli bir soy isim giriniz</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <label for="email">Email</label>
+                    <input type="text" formControlName="email" class="form-control" name="email" placeholder="Email">
+                    <small *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('email')?.errors?.['required']">Email gereklidir</div>
+                        <div *ngIf="registerForm.get('email')?.errors?.['email']">Geçerli bir email giriniz</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <label for="phoneNumber">Telefon No</label>
+                    <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" placeholder="Telefon No">
+                    <small *ngIf="registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Telefon numarası gereklidir</div>
+                        <div *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">Geçerli bir telefon numarası giriniz</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <label for="occupation">Meslek</label>
+                    <input type="text" formControlName="occupation" class="form-control" name="occupation" placeholder="Meslek">
+                    <small *ngIf="registerForm.get('occupation')?.invalid && (registerForm.get('occupation')?.dirty || registerForm.get('occupation')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('occupation')?.errors?.['required']">Meslek gereklidir</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <label for="sifre">Şifre</label>
+                    <input type="password" formControlName="sifre" class="form-control" name="sifre" placeholder="Şifre">
+                    <small *ngIf="registerForm.get('sifre')?.invalid && (registerForm.get('sifre')?.dirty || registerForm.get('sifre')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('sifre')?.errors?.['required']">Şifre gereklidir</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <label for="confirmPassword">Şifreyi Onayla</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" name="confirmPassword" placeholder="Şifreyi Onayla">
+                    <small *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="text-danger">
+                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Şifreyi onaylayın</div>
+                    </small>
+                    <small *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.valid && registerForm.get('sifre')?.valid" class="text-danger">
+                        Şifreler uyuşmalı
+                    </small>
+                </div>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="termsCheck" required>
+                <label class="form-check-label" for="termsCheck">
+                    By clicking you agree to the <a href="#">Terms and Conditions</a>
+                </label>
+            </div>
+            <p-button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">Kayıt Ol</p-button>
+            <div class="mt-2 text-center">Already a member? <a routerLink="/login">Login</a></div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,11 @@
+<app-navbar></app-navbar> <!-- NavbarComponent'i ekleyin -->
+
+<div class="kanban-board">
+    <div class="kanban-column" *ngFor="let column of columns">
+      <h2>{{ column }}</h2>
+      <div class="kanban-task" *ngFor="let task of getTasksByStatus(column)">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </div>
+    </div>
+  </div>

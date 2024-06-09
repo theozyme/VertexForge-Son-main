@@ -1,0 +1,16 @@
+@import '../node_modules/primeflex/primeflex.min.css';
+@import '../node_modules/primeng/resources/themes/saga-blue/theme.css';
+@import '../node_modules/primeng/resources/primeng.min.css';
+@import  "primeicons/primeicons.css";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html,
+body{
+    height: 100%;
+    margin: 0;
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

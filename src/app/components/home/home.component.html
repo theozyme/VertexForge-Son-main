@@ -1,0 +1,106 @@
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Boards ({{ boards.length }})</h3>
+    <ul>
+      <li *ngFor="let board of boards" (click)="selectBoard(board)" [class.selected]="board === selectedBoard">{{ board.name }}</li>
+    </ul>
+
+    <!-- Yeni board ekleme butonu -->
+    <button class="add-board-btn" (click)="showAddBoardDialog()">+ Yeni Board Ekle</button>
+
+    <!-- Yeni board ekleme dialogu -->
+    <div class="add-board-dialog" *ngIf="showAddBoard">
+      <input type="text" [(ngModel)]="newBoardName" placeholder="Board Adı">
+      <div class="dialog-buttons">
+        <button (click)="addBoard()">Ekle</button>
+        <button (click)="cancelAddBoard()">İptal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kanban Board -->
+<div class="kanban-board" cdkDropListGroup *ngIf="selectedBoard">
+  <div class="column" cdkDropList [cdkDropListData]="selectedBoard.tasks.todo" (cdkDropListDropped)="drop($event)">
+    <h3 class="todo">Yapılacaklar ({{ selectedBoard.tasks.todo.length }})</h3>
+    <div *ngFor="let task of selectedBoard.tasks.todo" class="task" cdkDrag (click)="editTask(task)">
+      {{ task.title }}
+    </div>
+  </div>
+  <div class="column" cdkDropList [cdkDropListData]="selectedBoard.tasks.inProgress" (cdkDropListDropped)="drop($event)">
+    <h3 class="in-progress">Şu anda yapılanlar ({{ selectedBoard.tasks.inProgress.length }})</h3>
+    <div *ngFor="let task of selectedBoard.tasks.inProgress" class="task" cdkDrag (click)="editTask(task)">
+      {{ task.title }}
+    </div>
+  </div>
+  <div class="column" cdkDropList [cdkDropListData]="selectedBoard.tasks.done" (cdkDropListDropped)="drop($event)">
+    <h3 class="done">Tamamlananlar ({{ selectedBoard.tasks.done.length }})</h3>
+    <div *ngFor="let task of selectedBoard.tasks.done" class="task" cdkDrag (click)="editTask(task)">
+      {{ task.title }}
+    </div>
+  </div>
+</div>
+
+  <!-- Task Board -->
+  <div class="task-board" *ngIf="selectedBoard">
+    <h3>Tasks</h3>
+    <!-- Yeni task ekleme butonu -->
+    <button class="add-task-btn" (click)="showAddTaskDialog()">+ Yeni Task Ekle</button>
+  </div>
+</div>
+
+<!-- Yeni task ekleme modal -->
+<div class="modal" *ngIf="showAddTask">
+  <div class="modal-content">
+    <span class="close" (click)="cancelAddTask()">&times;</span>
+    <h2>Yeni Görev Ekle</h2>
+    <form (ngSubmit)="addTask()">
+      <label for="taskName">Görev Adı</label>
+      <input type="text" id="taskName" [(ngModel)]="newTaskName" name="taskName" placeholder="Örnek Görev Adı" required>
+
+      <label for="taskDescription">Açıklama</label>
+      <textarea id="taskDescription" [(ngModel)]="newTaskDescription" name="taskDescription" placeholder="Örnek Açıklama" required></textarea>
+
+      <label for="listId">board numarası</label>
+      <div *ngFor="let listId of newListId; let i = index">
+        <input type="text" [(ngModel)]="newListId[i]" name="listId{{ i }}" placeholder="örnek board numarası = 1">
+      </div>
+      <button type="button" class="add-subtask-btn" (click)="addlistId()">+ board numarası ekle</button>
+
+      <label for="taskStatus">Mevcut Durum</label>
+      <select id="taskStatus" [(ngModel)]="newTaskStatus" name="taskStatus" required>
+        <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
+      </select>
+
+      <button type="submit" class="submit-task-btn">Ekle</button>
+    </form>
+  </div>
+</div>
+
+<!-- Task düzenleme modal -->
+<div class="modal" *ngIf="showEditTask">
+  <div class="modal-content">
+    <span class="close" (click)="cancelEditTask()">&times;</span>
+    <h2>Görev Düzenle</h2>
+    <form (ngSubmit)="updateTask()">
+      <label for="editTaskName">Görev Adı</label>
+      <input type="text" id="editTaskName" [(ngModel)]="editTaskName" name="editTaskName" required>
+
+      <label for="editTaskDescription">Açıklama</label>
+      <textarea id="editTaskDescription" [(ngModel)]="editTaskDescription" name="editTaskDescription" required></textarea>
+
+      <label for="editListId">Alt Görevler</label>
+      <div *ngFor="let subTask of editListId; let i = index">
+        <input type="text" [(ngModel)]="editListId[i]" name="editListId{{ i }}">
+      </div>
+      <button type="button" class="add-subtask-btn" (click)="addEditlistId()">+ Yeni board numarası ekle</button>
+
+      <label for="editTaskStatus">Mevcut Durum</label>
+      <select id="editTaskStatus" [(ngModel)]="editTaskStatus" name="editTaskStatus" required>
+        <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
+      </select>
+
+      <button type="submit" class="submit-task-btn">Güncelle</button>
+    </form>
+  </div>
+</div>

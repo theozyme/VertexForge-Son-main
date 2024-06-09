@@ -1,0 +1,75 @@
+<form [formGroup]="registerKurumsalForm" (ngSubmit)="submitKurumsalDetails()" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Kurumsal Kayıt</h2>
+            <p class="mb-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="form-row mb-3">
+                <div class="col">
+                    <input type="text" formControlName="name" class="form-control" placeholder="İsim" />
+                    <small *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+                        <div *ngIf="name.errors?.['required']">İsim gereklidir</div>
+                        <div *ngIf="name.errors?.['pattern']">Geçerli bir isim giriniz</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <input type="text" formControlName="surname" class="form-control" placeholder="Soy İsim" />
+                    <small *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="text-danger">
+                        <div *ngIf="surname.errors?.['required']">Soy isim gereklidir</div>
+                        <div *ngIf="surname.errors?.['pattern']">Geçerli bir soy isim giriniz</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email" />
+                    <small *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                        <div *ngIf="email.errors?.['required']">Email gereklidir</div>
+                        <div *ngIf="email.errors?.['email']">Geçerli bir email giriniz</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <input type="text" formControlName="phoneNumber" class="form-control" placeholder="Telefon No" />
+                    <small *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger">
+                        <div *ngIf="phoneNumber.errors?.['required']">Telefon numarası gereklidir</div>
+                        <div *ngIf="phoneNumber.errors?.['pattern']">Geçerli bir telefon numarası giriniz</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <input type="text" formControlName="department" class="form-control" placeholder="Departman" />
+                    <small *ngIf="department.invalid && (department.dirty || department.touched)" class="text-danger">
+                        <div *ngIf="department.errors?.['required']">Departman gereklidir</div>
+                    </small>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col">
+                    <input type="password" formControlName="sifre" class="form-control" placeholder="Şifre" />
+                    <small *ngIf="sifre.invalid && (sifre.dirty || sifre.touched)" class="text-danger">
+                        <div *ngIf="sifre.errors?.['required']">Şifre gereklidir</div>
+                    </small>
+                </div>
+                <div class="col">
+                    <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Şifreyi Onaylayın" />
+                    <small *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="text-danger">
+                        <div *ngIf="confirmPassword.errors?.['required']">Şifreyi onaylayın</div>
+                    </small>
+                    <small *ngIf="registerKurumsalForm.errors?.['passwordMismatch'] && confirmPassword.valid && sifre.valid" class="text-danger">
+                        Şifreler uyuşmalı
+                    </small>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="terms" required>
+                <label class="form-check-label" for="terms">By clicking you agree to the <a href="#">Terms and Conditions</a></label>
+            </div>
+            <p-button type="submit" class="btn btn-primary w-100" [disabled]="registerKurumsalForm.invalid">Kayıt Ol</p-button>
+            <div class="mt-2 text-center">Already a member? <a routerLink="/login">Login</a></div>
+        </div>
+    </div>
+</form>

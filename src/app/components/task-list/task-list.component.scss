@@ -1,0 +1,19 @@
+.task-column {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.task {
+  &.to-do {
+    border-left: 5px solid #ffc107;
+  }
+
+  &.in-progress {
+    border-left: 5px solid #17a2b8;
+  }
+
+  &.done {
+    border-left: 5px solid #28a745;
+  }
+}
